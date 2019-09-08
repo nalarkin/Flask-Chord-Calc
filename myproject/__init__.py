@@ -15,6 +15,9 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 Migrate(app,db)
 
+from myproject.chord_controller import ChordController
+chord_controller = ChordController()
+
 # NOTE! These imports need to come after you've defined db, otherwise you will
 # get errors in your models.py files.
 ## Grab the blueprints from the other views.py files for each "app"

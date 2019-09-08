@@ -1,4 +1,5 @@
 from myproject import db
+from myproject import chord_controller
 
 class Chord(db.Model):
         __tablename__ = 'chords'
@@ -22,8 +23,9 @@ class Progression(db.Model):
         progression = db.Column(db.Text)
         # scale = db.relationship('Scale',backref='chord',uselist=False)
 
+
         def __init__(self,chords):
-            self.progression = chords
+            self.progression = chord_controller.receive_new_progression(chords)
 
         def __repr__(self):
             return f"Progression name is {self.progression} and has no scale"
