@@ -15,3 +15,15 @@ class Chord(db.Model):
             # else:
                 # return f"Chord name is {self.steps} and has no scale
             return f"Chord name is {self.steps} and has no scale"
+
+class Progression(db.Model):
+        __tablename__ = 'progressions'
+        id = db.Column(db.Integer,primary_key = True)
+        progression = db.Column(db.Text)
+        # scale = db.relationship('Scale',backref='chord',uselist=False)
+
+        def __init__(self,chords):
+            self.progression = chords
+
+        def __repr__(self):
+            return f"Progression name is {self.progression} and has no scale"

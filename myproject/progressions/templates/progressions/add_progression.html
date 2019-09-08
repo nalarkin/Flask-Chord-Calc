@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="jumbotron">
-  <h1>Do you want to remove a chord?</h1>
-  <p>Fill out the form to remove a chord from the list.</p>
+  <h1>Have a progression you want to add?</h1>
+  <p>Add a new chord with the form below:</p>
   <form method="POST">
       {# This hidden_tag is a CSRF security feature. #}
       {{ form.hidden_tag() }}
-      {{ form.id.label }} {{ form.id() }}
+      {{ form.progressions.label }} {{ form.progressions() }}
       {{ form.submit() }}
   </form>
 </div>

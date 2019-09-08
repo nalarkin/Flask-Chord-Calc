@@ -19,7 +19,11 @@ Migrate(app,db)
 # get errors in your models.py files.
 ## Grab the blueprints from the other views.py files for each "app"
 from myproject.chords.views import chords_blueprint
+from myproject.progressions.views import progressions_blueprint
+
 # from myproject.owners.views import owners_blueprint
 #
 app.register_blueprint(chords_blueprint,url_prefix="/chords")
+app.register_blueprint(progressions_blueprint,url_prefix="/progressions")
+
 # app.register_blueprint(puppies_blueprint,url_prefix='/puppies')

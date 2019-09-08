@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="jumbotron">
-  <h1>Do you want to remove a chord?</h1>
-  <p>Fill out the form to remove a chord from the list.</p>
+  <h1>Do you need to remove a progression??</h1>
+  <p>Give the ID of the progression to remove.</p>
   <form method="POST">
       {# This hidden_tag is a CSRF security feature. #}
       {{ form.hidden_tag() }}

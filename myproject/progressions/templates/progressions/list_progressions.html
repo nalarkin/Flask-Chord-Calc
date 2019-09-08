@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="jumbotron">
+  <h1>Here is a list of all available progressions.</h1>
+  <ul>
+    {% for chord in progressions  %}
+    <li>ID: {{chord.id}} :: {{chord}}</li>
+    {% endfor %}
+  </ul>
+
+</div>
+{% endblock %}

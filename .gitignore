@@ -1,0 +1,11 @@
+
+myproject/__pycache__/__init__.cpython-37.pyc
+myproject/__pycache__/models.cpython-37.pyc
+myproject/chords/__pycache__/views.cpython-37.pyc
+myproject/progressions/__pycache__/forms.cpython-37.pyc
+myproject/progressions/__pycache__/views.cpython-37.pyc
+migrations/versions/__pycache__/617cafd674c9_created_progressions_table.cpython-37.pyc
+*.pyc
+myproject/chords/__pycache__/views.cpython-37.pyc
+myproject/__pycache__/models.cpython-37.pyc
+myproject/__pycache__/__init__.cpython-37.pyc
