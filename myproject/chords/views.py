@@ -12,6 +12,8 @@ def add():
 
     form = AddForm()
 
+
+
     if form.validate_on_submit():
         steps = form.steps.data
         # Add new owner to database

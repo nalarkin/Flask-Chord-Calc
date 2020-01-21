@@ -11,3 +11,9 @@ myproject/__pycache__/models.cpython-37.pyc
 myproject/__pycache__/__init__.cpython-37.pyc
 *.pyc
 *.pyc
+*.xml
+*.iml
+*.pyc
+*.pyc
+*.pyc
+myproject/test_file.py

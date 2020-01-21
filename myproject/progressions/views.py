@@ -7,6 +7,7 @@ progressions_blueprint = Blueprint('progressions',
                               __name__,
                               template_folder='templates/progressions')
 
+#route is the URL
 @progressions_blueprint.route('/add_progression', methods=['GET', 'POST'])
 def add():
 
@@ -22,13 +23,15 @@ def add():
         return redirect(url_for('progressions.list'))
     return render_template('add_progression.html',form=form)
 
-
+#route is the URL
 @progressions_blueprint.route('/list_progressions')
 def list():
     # Grab a list of puppies from database.
     progressions = Progression.query.all()
     return render_template('list_progressions.html', progressions=progressions)
 
+
+#route is the URL
 @progressions_blueprint.route('/delete_progressions', methods=['GET', 'POST'])
 def delete():
 

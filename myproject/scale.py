@@ -1,11 +1,12 @@
 
 
 class Scale():
-    def __init__(self):
+    def __init__(self, scale_root):
         self.all_keys = ''
         self.scale_size = 7
         self.note_tracker = ''
         self.major_scale_steps = [2, 2, 1, 2, 2, 2, 2]
+        self.build_scale(scale_root)
 
 
     def get_all_keys(self):

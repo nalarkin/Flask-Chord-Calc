@@ -3,12 +3,12 @@ from collections import deque
 
 
 class Chord(Scale):
-    def __init__(self, scale2, root_note):
+    def __init__(self, root_note='C'):
+        self.scale = Scale(root_note)
         self.note_list = []
         super().__init__()
-        self.scale = scale2
-        self.current_scale_notes = scale2.get_notes()
-        self.all_keys = scale2.get_all_keys()
+        self.current_scale_notes = scale.get_notes()
+        self.all_keys = scale.get_all_keys()
         self.note_length = 2
         self.rotate_to_chord_root(root_note)
         self.root_note = root_note
