@@ -16,6 +16,7 @@ def add():
 
     if form.validate_on_submit():
         steps = form.steps.data
+        chord_name = form.chord_name.data
         # Add new owner to database
         new_chord = Chord(steps)
         db.session.add(new_chord)

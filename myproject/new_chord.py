@@ -13,17 +13,61 @@ class NewChordController():
         self.all_keys_flats = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G',
                                'Ab', 'A', 'Bb', 'B']
         self.major_scale_steps = [2, 2, 1, 2, 2, 2, 2]
+        self.sharp_key_signatures = ['C', 'G', 'D', 'A', 'E', 'B', 'F#', 'C#']
+        self.flat_key_signatures = ['F', 'Bb', 'Eb', 'Ab', 'Db', 'Gb']
+
+
+    def find_progression(self, root_note, progression):
+        # create list of progression to iterate through
+        progression = progression.replace(' ', '')
+        progression = progression.split(',')
+        built_progression = []
+        for chord_name in progression:
+            pass
+            # convert chord_name into step_list
+            # using root note and semitone function, convert chord_name to
+            ##### new root note (ex. root = C, chord_name = V, new root = G)
+            # query chord  database for one with proper steps, search correct
+            ###### column for key signature of new_root
+
+        # for chord in progression_list[]
+            # rearrange chords to follow voicing rules
+        # return rearranged list of progression_list[]
+        pass
+
+
+    def find_new_root_note(self, root_note, chord_name):
+        if root_note in self.sharp_key_signatures:
+            starting_keys = self.rotate_keys_to_new_scale(root_note, self.all_keys_sharps)
+        else:
+            starting_keys = self.rotate_keys_to_new_scale(root_note,
+                                                          self.all_keys_flats)
+
+        diatonic_chord_number = self.find_roman_value(chord_name)
+        # convert to semitone
+        semitone_count = self.convert_scale_steps_to_semitones(str(diatonic_chord_number))
+
+        # find root_note in starting_keys
+        # return new root
+
+
+
+    def find_chord_type(self, chord_name):
+        if chord_name.find('*') != -1:
+            return "Diminished"
+        if chord_name.isupper():
+            return 'Major'
+        else:
+            return 'Minor'
 
 
     def create_12_chords(self, steps):
         steps = self.convert_steps_to_indexes(steps)
-        sharp_key_signatures = ['C', 'G', 'D', 'A', 'E', 'B', 'F#', 'C#']
-        flat_key_signatures = ['F', 'Bb', 'Eb', 'Ab', 'Db', 'Gb']
         generated_chords_list = []
-        for sharp_key_sig in sharp_key_signatures:
+        for sharp_key_sig in self.sharp_key_signatures:
             new_chord = self.create_new_chord(steps, sharp_key_sig, sharps=True)
             generated_chords_list.append(new_chord)
-        for flat_key_sig in flat_key_signatures:
+        for flat_key_sig in self.flat_key_signatures:
             new_chord = self.create_new_chord(steps, flat_key_sig)
             generated_chords_list.append(new_chord)
         # print("completed generated_chords_list = {}".format(generated_chords_list))
@@ -125,3 +169,32 @@ class NewChordController():
 
     def __repr__(self):
         return str("This is the controller, not an individual chord")
+
+    def roman_to_decimal(self, str):
+        sum = 0
+        index = 0
+        while (index < len(str)):
+            first_value = self.find_roman_value(str[index])
+            if (index+1 < len(str)):
+                second_value = self.find_roman_value(str[index+1])
+                if (first_value >= second_value):
+                    sum = sum + first_value
+                    index = index + 1
+                else:
+                    sum = sum + second_value - first_value
+                    index = index + 2
+            else:
+                sum = sum + first_value
+                index = index + 1
+
+        return sum
+
+    def find_roman_value(self, roman_numeral):
+        if roman_numeral.isdigit():
+            return 0
+        else:
+            roman_numeral = roman_numeral.upper()
+            if (roman_numeral == 'I'):
+                return 1
+            if (roman_numeral == 'V'):
+                return 5
