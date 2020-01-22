@@ -38,18 +38,20 @@ class NewChordController():
 
     def find_new_root_note(self, root_note, chord_name):
         if root_note in self.sharp_key_signatures:
-            starting_keys = self.rotate_keys_to_new_scale(root_note, self.all_keys_sharps)
+            self.all_keys_sharps = self.rotate_keys_to_new_scale(root_note,
+                                                 self.all_keys_sharps)
+            sharps = True
         else:
-            starting_keys = self.rotate_keys_to_new_scale(root_note,
+            self.all_keys_flats = self.rotate_keys_to_new_scale(root_note,
                                                           self.all_keys_flats)
-
-        diatonic_chord_number = self.find_roman_value(chord_name)
-        # convert to semitone
+            sharps = False
+        diatonic_chord_number = self.roman_to_decimal(chord_name)
+        # accounts for index starting at 0
+        diatonic_chord_number = diatonic_chord_number - 1
         semitone_count = self.convert_scale_steps_to_semitones(str(diatonic_chord_number))
-
-        # find root_note in starting_keys
-        # return new root
-
+        semitone_count = self.convert_list_to_int(semitone_count)
+        new_root = self.find_note(semitone_count, sharps)
+        return new_root
 
 
     def find_chord_type(self, chord_name):
@@ -90,15 +92,23 @@ class NewChordController():
         converted_semitones = self.convert_scale_steps_to_semitones(steps)
 
         for semitone in converted_semitones:
-            if sharps:
-                chord_note = self.all_keys_sharps[semitone]
-            else:
-                chord_note = self.all_keys_flats[semitone]
-            # chord_note = rotated_all_keys[step]
+            chord_note = self.find_note(semitone, sharps)
             new_chord.append(chord_note)
 
         print("new_chord = {}".format(new_chord))
         return new_chord
+
+    def convert_list_to_int(self, list):
+        new_int = int(str(list).strip('[]'))
+        return new_int
+
+
+    def find_note(self, semitone, sharps=False):
+        if sharps:
+            chord_note = self.all_keys_sharps[semitone]
+        else:
+            chord_note = self.all_keys_flats[semitone]
+        return chord_note
 
     def rotate_keys_to_new_scale(self, root_note, keys_to_rotate):
         rotating_deque = deque(keys_to_rotate)
@@ -186,7 +196,6 @@ class NewChordController():
             else:
                 sum = sum + first_value
                 index = index + 1
-
         return sum
 
     def find_roman_value(self, roman_numeral):
